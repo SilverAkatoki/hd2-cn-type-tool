@@ -1,0 +1,10 @@
+[package]
+name = "hd2-cn-type-tool"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+eframe = "0.31.1"
+embed-resource = "3.0.2"
+rdev = "0.5.3"
+enigo = "0.3.0"
