@@ -52,7 +52,7 @@ fn main() -> eframe::Result {
             EventType::KeyPress(key) => {
                 if key == rdev::Key::F8 {
                     if let Ok(text) = input_text_clone.read() {
-                        let _ = enigo.text(&text.clone());
+                        let _ = enigo.text(&*text);
                     }
                 }
             }
@@ -62,7 +62,7 @@ fn main() -> eframe::Result {
     });
 
     eframe::run_simple_native("Alt 输入器", options, move |ctx, _| {
-        ctx.set_fonts(fonts.clone());
+        ctx.set_fonts(fonts.clone());   // 需要所有权，只能 clone
         // ctx.set_visuals(egui::Visuals::dark());
         egui::CentralPanel::default().show(ctx, |ui| {
             egui::ScrollArea::vertical().show(ui, |ui| {
