@@ -36,7 +36,9 @@ fn main() -> eframe::Result {
     let options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
             .with_inner_size([300.0, 140.0])
-            .with_resizable(false), // 不可缩放
+            .with_resizable(false) // 不可缩放
+            .with_maximized(false) // 初始状态不最大化
+            .with_maximize_button(false), // 禁用最大化按钮
         ..Default::default()
     };
 
@@ -62,11 +64,11 @@ fn main() -> eframe::Result {
     });
 
     eframe::run_simple_native("Alt 输入器", options, move |ctx, _| {
-        ctx.set_fonts(fonts.clone());   // 需要所有权，只能 clone
+        ctx.set_fonts(fonts.clone()); // 需要所有权，只能 clone
         // ctx.set_visuals(egui::Visuals::dark());
         egui::CentralPanel::default().show(ctx, |ui| {
             egui::ScrollArea::vertical().show(ui, |ui| {
-                ui.label("用 F8 键将下面的文本发送到当前窗口。");
+                ui.label("用 F8 键将下面的文本发送到当前输入框。");
                 let mut text = input_text.write().unwrap();
                 ui.text_edit_multiline(&mut *text);
                 *text = text.replace('\n', ""); // 去掉换行符
